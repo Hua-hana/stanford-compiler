@@ -106,3 +106,6 @@ Instructions
 Write-up for PA2
 ----------------
 
+* 一开始无法编译lexer，提示yylex没有定义，参考了https://blog.csdn.net/benladeng29hao/article/details/109111367
+* 观察cool-parse.h学到了union的用法，花括号内部的字段共享一个内存空间，当只需要用到其中一个字段时，这样的数据结构可以节省空间
+

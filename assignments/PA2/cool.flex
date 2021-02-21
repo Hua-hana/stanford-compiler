@@ -45,11 +45,14 @@ extern YYSTYPE cool_yylval;
 
 %}
 
+%option noyywrap
+
 /*
  * Define names for regular expressions here.
  */
 
-DARROW          =>
+DARROW =>
+ASSIGN <-
 
 %%
 
@@ -60,6 +63,7 @@ DARROW          =>
 
  /*
   *  The multiple-character operators.
+      why need "()"?
   */
 {DARROW}		{ return (DARROW); }
 
@@ -68,6 +72,25 @@ DARROW          =>
   * which must begin with a lower-case letter.
   */
 
+class {return (CLASS);}
+else {return (ELSE);}
+fi {return (FI);}
+if {return (IF);}
+in {return (IN);}
+inherits {return (INHERITS);}
+let {return (LET);}
+loop {return (LOOP);}
+pool {return (POOL);} 
+then {return (THEN);}
+while {return (WHILE);}
+case {return (CASE}
+esac {return (ESAC);}
+of {return (OF);}
+new {return (NEW);}
+isvoid {return (ISVOID);}
+not {return (NOT);}
+t[rR][uU][eE] {yylval.boolean=true;return (BOOL_CONST);}
+f[aA][lL][sS][eE] {yylval.boolean=false;return (BOOL_CONST);}
 
  /*
   *  String constants (C syntax)
