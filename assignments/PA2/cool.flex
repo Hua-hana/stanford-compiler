@@ -77,7 +77,7 @@ OBJECTID [a-z][0-9a-zA-Z_]*
 {ASSIGN} {return (ASSIGN);}
 
 /*single character*/
-
+[{}@:.,();+-*/~=] {return (int)yytext[0];}
 
 
  /*
