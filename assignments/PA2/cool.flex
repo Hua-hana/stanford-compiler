@@ -46,13 +46,21 @@ extern YYSTYPE cool_yylval;
 %}
 
 %option noyywrap
-
+/* add start state for comment and quote*/
+%x COMMENT
+%x STR
 /*
  * Define names for regular expressions here.
  */
 
 DARROW =>
 ASSIGN <-
+LE <
+INT_CONST [0-9]+
+TRUE t[rR][uU][eE]
+FALSE f[aA][lL][sS][eE] 
+TYPEID [A-Z][0-9a-zA-Z_]*
+OBJECTID [a-z][0-9a-zA-Z_]*
 
 %%
 
@@ -65,13 +73,17 @@ ASSIGN <-
   *  The multiple-character operators.
       why need "()"?
   */
-{DARROW}		{ return (DARROW); }
+{DARROW} {return (DARROW);}
+{ASSIGN} {return (ASSIGN);}
+
+/*single character*/
+
+
 
  /*
   * Keywords are case-insensitive except for the values true and false,
   * which must begin with a lower-case letter.
   */
-
 class {return (CLASS);}
 else {return (ELSE);}
 fi {return (FI);}
@@ -89,8 +101,8 @@ of {return (OF);}
 new {return (NEW);}
 isvoid {return (ISVOID);}
 not {return (NOT);}
-t[rR][uU][eE] {yylval.boolean=true;return (BOOL_CONST);}
-f[aA][lL][sS][eE] {yylval.boolean=false;return (BOOL_CONST);}
+{TRUE} {yylval.boolean=true;return (BOOL_CONST);}
+{FALSE} {yylval.boolean=false;return (BOOL_CONST);}
 
  /*
   *  String constants (C syntax)

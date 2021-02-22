@@ -108,4 +108,6 @@ Write-up for PA2
 
 * 一开始无法编译lexer，提示yylex没有定义，参考了https://blog.csdn.net/benladeng29hao/article/details/109111367
 * 观察cool-parse.h学到了union的用法，花括号内部的字段共享一个内存空间，当只需要用到其中一个字段时，这样的数据结构可以节省空间
-
+* 问题：LET_STMT LE是什么？括号为什么不算token？操作符如何处理？
+* LET_STMT忽略 LE就是<字符（为什么要特殊处理） 特殊字符用ASCII的整数值来表示
+* start condition写comment的识别
